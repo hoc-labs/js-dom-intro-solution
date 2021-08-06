@@ -226,12 +226,12 @@ if (answer===true) {
 
 This code presents an aspect of web programming that we haven't discussed yet.  If we run the code below, you will see the alert that says "The color is red" come up, but the background color will not have been updated yet.
 
-
 ![](https://raw.githubusercontent.com/hoc-labs/images/main/dom-alert-3.png)
 
-This is because the JavaScript code that is executing will continue until all of the code has completed and then control will be given back to the web browser. At that time the web browser will translate the changes in the DOM to changes on the screen.
+This is because the web browser event loop that is checking the DOM for changes that require a repaint of the screen hasn't had a chance to run before the  confirm instruction suspends all code from executing. 
 
-There is a way to make this code work correctly. The window.setTimeout method allows you to schedule some code to be executed at some point in the future (usually very soon in the future). Using window.setTimeout, we can defer the code that will ask whether the user likes the new background color until after the browser has had a chance to update the screen to reflect the new color.
+
+There is a way to work around this issue. The window.setTimeout method allows you to schedule some code to be executed at some point in the future (in our case just two seconds). Using window.setTimeout, we can defer the code that will ask whether the user likes the new background color until after the browser has had a chance to update the screen to reflect the new color.
 
 ```javascript
 let colorBefore = document.body.style.backgroundColor;
